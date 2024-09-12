@@ -30,5 +30,13 @@ services:
       - flask
     restart: unless-stopped
 
+  adminer:
+    image: adminer:latest
+    ports:
+      - "8000:8080"
+    depends_on:
+      - db
+    restart: unless-stopped
+
 volumes:
   db-data:
