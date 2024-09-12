@@ -1,0 +1,34 @@
+services:
+  db:
+    image: mariadb:latest
+    environment:
+      MYSQL_ROOT_PASSWORD: rootpassword
+      MYSQL_DATABASE: dbname
+      MYSQL_USER: user
+      MYSQL_PASSWORD: userpassword
+    ports:
+      - "3306:3306"
+    volumes:
+      - db-data:/var/lib/mysql
+    restart: unless-stopped
+
+  flask:
+    build: ./flask_blueprint
+    ports:
+      - "5000:5000"
+    environment:
+      - DATABASE_URL=mysql+pymysql://user:userpassword@db/dbname
+    depends_on:
+      - db
+    restart: unless-stopped
+
+  vue:
+    build: ./vue_blueprint
+    ports:
+      - "8080:8080"
+    depends_on:
+      - flask
+    restart: unless-stopped
+
+volumes:
+  db-data:
