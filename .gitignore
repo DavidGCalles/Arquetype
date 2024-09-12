@@ -1,2 +1,33 @@
 Flask_Blueprint/app/__pycache__/
 Flask_Blueprint/app/routes/__pycache__/
+vue_blueprint/src/firebase.js
+
+
+# Logs
+vue_blueprint/logs
+vue_blueprint/*.log
+vue_blueprint/npm-debug.log*
+vue_blueprint/yarn-debug.log*
+vue_blueprint/yarn-error.log*
+vue_blueprint/pnpm-debug.log*
+vue_blueprint/lerna-debug.log*
+
+vue_blueprint/node_modules
+vue_blueprint/.DS_Store
+vue_blueprint/dist
+vue_blueprint/dist-ssr
+vue_blueprint/coverage
+vue_blueprint/*.local
+
+vue_blueprint/cypress/videos/
+vue_blueprint/cypress/screenshots/
+
+
+# Editor directories and files
+.vscode/*
+!.vscode/extensions.json
+*.tsbuildinfo
+package-lock.json
+jsconfig.json
+package.json
+.eslintrc.cjs
