@@ -29,5 +29,4 @@ vue_blueprint/cypress/screenshots/
 *.tsbuildinfo
 package-lock.json
 jsconfig.json
-package.json
 .eslintrc.cjs
