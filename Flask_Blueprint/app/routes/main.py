@@ -20,7 +20,7 @@ def ping():
     """
     return jsonify({"message": "pong"})
 
-@main_bp.route('/generic_crud', methods=['GET'])
+'''@main_bp.route('/generic_crud', methods=['GET'])
 def root():
     """
     Get All items
@@ -36,4 +36,4 @@ def root():
       400:
         description: No data retrived.
     """
-    return jsonify({"data": "ok"})
+    return jsonify({"data": "ok"})'''

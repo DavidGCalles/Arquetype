@@ -40,7 +40,7 @@
           }
         }
       },
-      "/generic_crud": {
+      "/crud": {
         "get": {
           "tags": ["generic_crud"],
           "summary": "Get all users",
