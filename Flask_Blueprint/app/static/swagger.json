@@ -9,14 +9,18 @@
     "basePath": "/api",
     "tags": [
       {
-        "name": "ping",
-        "description": "Ping operations"
+        "name": "checks",
+        "description": "Ping operations to key subsystems"
+      },
+      {
+        "name": "generic_crud",
+        "description": "Standard demo crud operations"
       }
     ],
     "paths": {
       "/ping": {
         "get": {
-          "tags": ["ping"],
+          "tags": ["checks"],
           "summary": "Ping the server",
           "description": "Returns a pong response",
           "produces": ["application/json"],
@@ -35,7 +39,86 @@
             }
           }
         }
+      },
+      "/test_db": {
+        "get": {
+          "tags": ["checks"],
+          "summary": "Test database connection",
+          "description": "Tests the connection to the database and returns a status message.",
+          "produces": ["application/json"],
+          "responses": {
+            "200": {
+              "description": "Connection successful",
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "message": {
+                    "type": "string",
+                    "example": "Database Correctly Connected"
+                  }
+                }
+              }
+            },
+            "503": {
+              "description": "Failed to connect to the database",
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "message": {
+                    "type": "string",
+                    "example": "Database Not Connected"
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "/crud": {
+        "get": {
+          "tags": ["generic_crud"],
+          "summary": "Get all users",
+          "description": "Retrieves all user data from the users table",
+          "produces": ["application/json"],
+          "responses": {
+            "200": {
+              "description": "Successful retrieval of data",
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "data": {
+                    "type": "array",
+                    "items": {
+                      "type": "object",
+                      "properties": {
+                        "id": {
+                          "type": "integer",
+                          "example": 1
+                        },
+                        "name": {
+                          "type": "string",
+                          "example": "John Doe"
+                        },
+                        "email": {
+                          "type": "string",
+                          "example": "john.doe@example.com"
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            },
+            "404": {
+              "description": "No data found"
+            },
+            "500": {
+              "description": "Internal server error"
+            }
+          }
+        }
       }
     }
-  }
+}
+
   
