@@ -4,7 +4,7 @@ class Config:
         'title': 'Flask API',
         'uiversion': 3
     }
-    DB_HOST = 'localhost'
+    DB_HOST = 'db'
     DB_PORT = '3306'
     DB_NAME = 'dbname'
     DB_USER = 'root'

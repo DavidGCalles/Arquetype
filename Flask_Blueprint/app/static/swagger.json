@@ -9,8 +9,8 @@
     "basePath": "/api",
     "tags": [
       {
-        "name": "ping",
-        "description": "Ping operations"
+        "name": "checks",
+        "description": "Ping operations to key subsystems"
       },
       {
         "name": "generic_crud",
@@ -20,7 +20,7 @@
     "paths": {
       "/ping": {
         "get": {
-          "tags": ["ping"],
+          "tags": ["checks"],
           "summary": "Ping the server",
           "description": "Returns a pong response",
           "produces": ["application/json"],
@@ -36,6 +36,31 @@
                   }
                 }
               }
+            }
+          }
+        }
+      },
+      "/test_db": {
+        "get": {
+          "tags": ["checks"],
+          "summary": "Test database connection",
+          "description": "Tests the connection to the database and returns a status message.",
+          "produces": ["application/json"],
+          "responses": {
+            "200": {
+              "description": "Connection successful",
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "message": {
+                    "type": "string",
+                    "example": "Database connection is successful"
+                  }
+                }
+              }
+            },
+            "500": {
+              "description": "Failed to connect to the database"
             }
           }
         }

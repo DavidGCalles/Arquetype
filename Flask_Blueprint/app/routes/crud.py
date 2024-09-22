@@ -1,6 +1,9 @@
 from flask import Blueprint, jsonify
+from app.dao.generic_dao import BaseDAO
 
 crud_bp = Blueprint('crud', __name__)
+
+crud_dao = BaseDAO()
 
 @crud_bp.route('/crud', methods=['GET'])
 def generic_crud():
@@ -18,4 +21,6 @@ def generic_crud():
       400:
         description: No data retrieved.
     """
-    return jsonify({"data": "ok"})
+    data = crud_dao.generic_get_all()
+    print(data)
+    return jsonify({"data": data})
