@@ -7,7 +7,7 @@ def create_app():
     CORS(app, expose_headers=['Content-Type'], supports_credentials=True)
     
     # Register Blueprints
-    from .routes.main import main_bp
+    from app.routes.main import main_bp
     app.register_blueprint(main_bp, url_prefix='/api')
 
     # Swagger UI setup

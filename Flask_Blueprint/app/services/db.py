@@ -6,6 +6,7 @@ from config import Config
 
 def get_db_connection():
     try:
+        print(Config.DB_HOST)
         connection = mysql.connector.connect(
             host=Config.DB_HOST,
             port=Config.DB_PORT,

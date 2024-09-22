@@ -11,6 +11,10 @@
       {
         "name": "ping",
         "description": "Ping operations"
+      },
+      {
+        "name": "generic_crud",
+        "description": "Standard demo crud operations"
       }
     ],
     "paths": {
@@ -35,7 +39,52 @@
             }
           }
         }
+      },
+      "/generic_crud": {
+        "get": {
+          "tags": ["generic_crud"],
+          "summary": "Get all users",
+          "description": "Retrieves all user data from the users table",
+          "produces": ["application/json"],
+          "responses": {
+            "200": {
+              "description": "Successful retrieval of data",
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "data": {
+                    "type": "array",
+                    "items": {
+                      "type": "object",
+                      "properties": {
+                        "id": {
+                          "type": "integer",
+                          "example": 1
+                        },
+                        "name": {
+                          "type": "string",
+                          "example": "John Doe"
+                        },
+                        "email": {
+                          "type": "string",
+                          "example": "john.doe@example.com"
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            },
+            "404": {
+              "description": "No data found"
+            },
+            "500": {
+              "description": "Internal server error"
+            }
+          }
+        }
       }
     }
-  }
+}
+
   

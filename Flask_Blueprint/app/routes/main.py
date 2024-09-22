@@ -1,4 +1,5 @@
 from flask import Blueprint, jsonify, request
+from app.dao.generic_dao import BaseDAO
 
 main_bp = Blueprint('main', __name__)
 
@@ -18,3 +19,21 @@ def ping():
               example: pong
     """
     return jsonify({"message": "pong"})
+
+@main_bp.route('/generic_crud', methods=['GET'])
+def root():
+    """
+    Get All items
+    ---
+    responses:
+      200:
+        description: Data is retrived
+        schema:
+          type: object
+          properties:
+            data:
+              type: object
+      400:
+        description: No data retrived.
+    """
+    return jsonify({"data": "ok"})
