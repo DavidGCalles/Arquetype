@@ -17,8 +17,8 @@ services:
     build: ./flask_blueprint
     ports:
       - "5000:5000"
-    environment:
-      - DATABASE_URL=mysql+pymysql://admin:admin@db/dbname
+    #environment:
+    #  - DATABASE_URL=mysql+pymysql://admin:admin@db/dbname
     depends_on:
       - db
     restart: unless-stopped
