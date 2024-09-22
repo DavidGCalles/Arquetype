@@ -1,23 +1,22 @@
 services:
   db:
-    image: mariadb:latest
+    image: mariadb
     environment:
-      MYSQL_ROOT_PASSWORD: rootpassword
-      MYSQL_DATABASE: dbname
-      MYSQL_USER: user
-      MYSQL_PASSWORD: userpassword
+      MYSQL_ROOT_PASSWORD: toor
+      #MYSQL_DATABASE: dbname
+      MYSQL_USER: admin
+      MYSQL_PASSWORD: admin
     ports:
       - "3306:3306"
     volumes:
       - db-data:/var/lib/mysql
+      - ./db_init:/docker-entrypoint-initdb.d  # Mount the SQL file directory
     restart: unless-stopped
 
   flask:
     build: ./flask_blueprint
     ports:
       - "5000:5000"
-    environment:
-      - DATABASE_URL=mysql+pymysql://user:userpassword@db/dbname
     depends_on:
       - db
     restart: unless-stopped
