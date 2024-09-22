@@ -54,13 +54,22 @@
                 "properties": {
                   "message": {
                     "type": "string",
-                    "example": "Database connection is successful"
+                    "example": "Database Correctly Connected"
                   }
                 }
               }
             },
-            "500": {
-              "description": "Failed to connect to the database"
+            "503": {
+              "description": "Failed to connect to the database",
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "message": {
+                    "type": "string",
+                    "example": "Database Not Connected"
+                  }
+                }
+              }
             }
           }
         }

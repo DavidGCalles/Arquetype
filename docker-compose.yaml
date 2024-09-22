@@ -1,9 +1,9 @@
 services:
   db:
-    image: mariadb:latest
+    image: mariadb
     environment:
       MYSQL_ROOT_PASSWORD: toor
-      MYSQL_DATABASE: dbname
+      #MYSQL_DATABASE: dbname
       MYSQL_USER: admin
       MYSQL_PASSWORD: admin
     ports:
@@ -17,8 +17,6 @@ services:
     build: ./flask_blueprint
     ports:
       - "5000:5000"
-    #environment:
-    #  - DATABASE_URL=mysql+pymysql://admin:admin@db/dbname
     depends_on:
       - db
     restart: unless-stopped

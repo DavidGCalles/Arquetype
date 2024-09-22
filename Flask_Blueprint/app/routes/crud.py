@@ -1,3 +1,4 @@
+"""This blueprint holds every endpoint related to basic crud operations, used for demo purposes"""
 from flask import Blueprint, jsonify
 from app.dao.generic_dao import BaseDAO
 
@@ -22,5 +23,4 @@ def generic_crud():
         description: No data retrieved.
     """
     data = crud_dao.generic_get_all()
-    print(data)
     return jsonify({"data": data})
