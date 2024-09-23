@@ -116,6 +116,188 @@
               "description": "Internal server error"
             }
           }
+        },
+        "post": {
+          "tags": ["generic_crud"],
+          "summary": "Insert a new user record",
+          "description": "Inserts a new record into the users table. Includes user details such as user ID, date, transaction total, and optional comments, eye color, and a life text.",
+          "consumes": ["application/json"],
+          "produces": ["application/json"],
+          "parameters": [
+            {
+              "in": "body",
+              "name": "user",
+              "description": "User record data",
+              "required": true,
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "user_id": {
+                    "type": "string",
+                    "example": "user1234"
+                  },
+                  "date": {
+                    "type": "string",
+                    "format": "date",
+                    "example": "2024-09-23"
+                  },
+                  "total": {
+                    "type": "number",
+                    "format": "decimal",
+                    "example": 199.99
+                  },
+                  "comments": {
+                    "type": "string",
+                    "example": "This is a sample comment about the transaction."
+                  },
+                  "eyes": {
+                    "type": "string",
+                    "example": "blue"
+                  },
+                  "lifetext": {
+                    "type": "string",
+                    "example": "This is a long text describing the user's life, background, or other detailed information."
+                  }
+                }
+              }
+            }
+          ],
+          "responses": {
+            "201": {
+              "description": "User record inserted successfully",
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "message": {
+                    "type": "string",
+                    "example": "User record added successfully"
+                  }
+                }
+              }
+            },
+            "400": {
+              "description": "Invalid user data provided"
+            },
+            "503": {
+              "description": "Service unavailable"
+            }
+          }
+        },
+        "patch": {
+          "tags": ["generic_crud"],
+          "summary": "Update an existing user record",
+          "description": "Updates an existing record in the users table based on the user ID provided.",
+          "consumes": ["application/json"],
+          "produces": ["application/json"],
+          "parameters": [
+            {
+              "in": "body",
+              "name": "user",
+              "description": "Updated user record data",
+              "required": true,
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "id": {
+                    "type": "integer",
+                    "required": true,
+                    "example": 1
+                  },
+                  "name": {
+                    "type": "string",
+                    "example": "Jane Doe"
+                  },
+                  "email": {
+                    "type": "string",
+                    "example": "jane.doe@example.com"
+                  }
+                }
+              }
+            }
+          ],
+          "responses": {
+            "200": {
+              "description": "User record updated successfully",
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "success": {
+                    "type": "boolean",
+                    "example": true
+                  }
+                }
+              }
+            },
+            "400": {
+              "description": "Invalid user data or no ID provided"
+            },
+            "503": {
+              "description": "Service unavailable"
+            }
+          }
+        },
+        "delete": {
+          "tags": ["generic_crud"],
+          "summary": "Delete an existing user record",
+          "description": "Deletes an existing user record from the users table based on the user ID provided.",
+          "consumes": ["application/json"],
+          "produces": ["application/json"],
+          "parameters": [
+            {
+              "in": "body",
+              "name": "user",
+              "description": "Identifier for the user to be deleted",
+              "required": true,
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "id": {
+                    "type": "integer",
+                    "required": true,
+                    "example": 1
+                  }
+                }
+              }
+            }
+          ],
+          "responses": {
+            "200": {
+              "description": "User record deleted successfully",
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "message": {
+                    "type": "string",
+                    "example": "User record deleted successfully"
+                  }
+                }
+              }
+            },
+            "400": {
+              "description": "Invalid user data or no ID provided",
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "message": {
+                    "type": "string",
+                    "example": "Invalid ID provided or record cannot be found"
+                  }
+                }
+              }
+            },
+            "503": {
+              "description": "Service unavailable",
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "message": {
+                    "type": "string",
+                    "example": "Database service is unavailable"
+                  }
+                }
+              }
+            }
+          }
         }
       }
     }
