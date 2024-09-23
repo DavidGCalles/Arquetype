@@ -235,6 +235,69 @@
               "description": "Service unavailable"
             }
           }
+        },
+        "delete": {
+          "tags": ["generic_crud"],
+          "summary": "Delete an existing user record",
+          "description": "Deletes an existing user record from the users table based on the user ID provided.",
+          "consumes": ["application/json"],
+          "produces": ["application/json"],
+          "parameters": [
+            {
+              "in": "body",
+              "name": "user",
+              "description": "Identifier for the user to be deleted",
+              "required": true,
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "id": {
+                    "type": "integer",
+                    "required": true,
+                    "example": 1
+                  }
+                }
+              }
+            }
+          ],
+          "responses": {
+            "200": {
+              "description": "User record deleted successfully",
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "message": {
+                    "type": "string",
+                    "example": "User record deleted successfully"
+                  }
+                }
+              }
+            },
+            "400": {
+              "description": "Invalid user data or no ID provided",
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "message": {
+                    "type": "string",
+                    "example": "Invalid ID provided or record cannot be found"
+                  }
+                }
+              }
+            },
+            "503": {
+              "description": "Service unavailable",
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "message": {
+                    "type": "string",
+                    "example": "Database service is unavailable"
+                  }
+                }
+              }
+            }
+          }
         }
       }
     }

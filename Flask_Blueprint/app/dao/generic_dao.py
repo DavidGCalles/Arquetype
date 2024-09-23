@@ -1,5 +1,4 @@
 """This DAO represents the minimum entity to be used as DAO. Can be used as base class or totally rewritten."""
-
 from app.services.db import get_db_connection
 
 class BaseDAO:
@@ -90,3 +89,31 @@ class BaseDAO:
             self.connection.commit()  # Commit the changes
 
         return cursor.rowcount  # Return the number of rows affected
+
+    def generic_delete(self, pk:str, id_to_delete:str|int):
+        """
+        Deletes a record from the database based on the primary key and its value.
+
+        This method constructs and executes a SQL DELETE statement to remove a record 
+        from the specified table. It uses the primary key and its value to identify 
+        the record to be deleted. It's important to handle this method with care to 
+        avoid accidental data loss.
+
+        Parameters:
+        - pk (str): The name of the primary key column in the table.
+        - id_to_delete (Union[str, int]): The value of the primary key for the record to be deleted.
+
+        Returns:
+        - bool: True if the deletion was executed successfully, False otherwise.
+
+        Example:
+        - generic_delete('user_id', 101)
+        This would attempt to delete from the table where the 'user_id' column equals 101.
+
+        Raises:
+        - Exception: If the SQL execution fails or if there are issues with the database connection.
+        """
+        query = f"DELETE FROM {self.table} WHERE {pk} = {id_to_delete}"
+        cursor = self.connection.cursor()
+        cursor.execute(query)
+        return True

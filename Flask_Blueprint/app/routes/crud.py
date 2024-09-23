@@ -6,7 +6,7 @@ crud_bp = Blueprint('crud', __name__)
 
 crud_dao = BaseDAO()
 
-@crud_bp.route('/crud', methods=['GET', 'POST', 'PATCH'])
+@crud_bp.route('/crud', methods=['GET', 'POST', 'PATCH', 'DELETE'])
 def generic_crud():
     """
     Generic CRUD operations for handling items.
@@ -65,6 +65,25 @@ def generic_crud():
                             success:
                                 type: boolean
                                 example: false
+        DELETE:
+            description: Delete an existing item.
+            responses:
+                200:
+                    description: Item is successfully deleted.
+                    schema:
+                        type: object
+                        properties:
+                            message:
+                                type: string
+                                example: "Record deleted successfully"
+                503:
+                    description: Unable to delete the item.
+                    schema:
+                        type: object
+                        properties:
+                            message:
+                                type: string
+                                example: "Record cannot be deleted"
     """
     if request.method == "GET":
         data = crud_dao.generic_get_all()
@@ -85,3 +104,9 @@ def generic_crud():
                 return jsonify(True), 200
         else:
             return jsonify(False), 400
+    elif request.method == "DELETE":
+        id_request = request.json.get("id")
+        if crud_dao.generic_delete("id",id_request):
+            return jsonify({"message": "Record deleted succesfully"}), 200
+        else:
+            return jsonify({"message": "Record cant be deleted"}), 503
