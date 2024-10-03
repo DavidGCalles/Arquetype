@@ -17,6 +17,9 @@ services:
     build: ./flask_blueprint
     ports:
       - "5000:5000"
+    environment:
+      GOOGLE_CLIENT_ID: ${GOOGLE_CLIENT_ID}
+      GOOGLE_CLIENT_SECRET: ${GOOGLE_CLIENT_SECRET}
     depends_on:
       - db
     restart: unless-stopped

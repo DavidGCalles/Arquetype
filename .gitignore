@@ -33,3 +33,4 @@ jsconfig.json
 Flask_Blueprint/__pycache__/
 Flask_Blueprint/app/dao/__pycache__/
 Flask_Blueprint/app/services/__pycache__/
+Flask_Blueprint/credentials.json
