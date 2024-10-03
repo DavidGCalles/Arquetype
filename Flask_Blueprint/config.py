@@ -1,5 +1,6 @@
 """This module stores all config strings and details needed to run the app"""
 from os import getenv
+import logging
 
 class Config:
     """Stores every config detail needed"""
@@ -21,3 +22,12 @@ class Config:
         "TOKEN_URI" : 'https://accounts.google.com/o/oauth2/token',
         "SCOPE" : ['https://www.googleapis.com/auth/gmail.readonly', 'https://www.googleapis.com/auth/calendar']
     }
+
+
+# Setup logger
+LOGGER = logging.getLogger(__name__)
+LOGGER.setLevel(logging.DEBUG)
+handler = logging.StreamHandler()
+formatter = logging.Formatter('%(asctime)s - %(name)s - %(levelname)s - %(message)s')
+handler.setFormatter(formatter)
+LOGGER.addHandler(handler)

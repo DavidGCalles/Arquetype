@@ -1,7 +1,7 @@
 Flask_Blueprint/app/__pycache__/
 Flask_Blueprint/app/routes/__pycache__/
 vue_blueprint/src/firebase.js
-
+.env
 
 # Logs
 vue_blueprint/logs

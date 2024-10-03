@@ -300,7 +300,7 @@
           }
         }
       },
-      "/auth/login": {
+      "/login": {
       "get": {
         "tags": ["auth"],
         "summary": "Initiate OAuth2 login",
@@ -313,7 +313,7 @@
         }
       }
       },
-      "/auth/google_callback": {
+      "/login/google_callback": {
         "get": {
           "tags": ["auth"],
           "summary": "Google OAuth2 callback endpoint",
