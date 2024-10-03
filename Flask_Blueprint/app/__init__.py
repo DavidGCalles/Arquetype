@@ -9,8 +9,10 @@ def create_app():
     # Register Blueprints
     from app.routes.main import main_bp
     from app.routes.crud import crud_bp  # Import the new CRUD blueprint
+    from app.routes.google_api_login import login_bp
     app.register_blueprint(main_bp, url_prefix='/api')
     app.register_blueprint(crud_bp, url_prefix='/api')  # Register the CRUD blueprint
+    app.register_blueprint(login_bp, url_prefix="/api")
 
     # Swagger UI setup
     SWAGGER_URL = '/swagger'
