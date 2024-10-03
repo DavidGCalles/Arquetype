@@ -14,8 +14,7 @@ class BaseDAO:
         Initializes the BaseDAO with a specific table name and database connection.
         """
         self.table = "users"
-        self.connection = get_db_connection()
-
+        self.connection = None
     def generic_get_all(self):
         """
         Fetches all records from the database table.
@@ -23,6 +22,7 @@ class BaseDAO:
         Returns:
             list: A list of tuples representing each record fetched from the table.
         """
+        self.connection = get_db_connection()
         query = f"SELECT * FROM {self.table}"
         cursor = self.connection.cursor()
         cursor.execute(query)
@@ -40,6 +40,7 @@ class BaseDAO:
             int: The auto-generated ID of the newly inserted record.
         """
             # Extract keys and values from insert_data
+        self.connection = get_db_connection()
         keys = ", ".join(insert_data.keys())
         placeholders = ", ".join(["%s"] * len(insert_data))  # Use placeholders for security
 
@@ -77,6 +78,7 @@ class BaseDAO:
         Raises:
         - KeyError: If the primary key is not found in the update_data dictionary.
         - psycopg2.DatabaseError: If an error occurs during database operation."""
+        self.connection = get_db_connection()
         primary_key = update_data.pop(pk)
         keys = ", ".join([f"{key} = %s" for key in update_data.keys()])
         values = list(update_data.values())
@@ -113,6 +115,7 @@ class BaseDAO:
         Raises:
         - Exception: If the SQL execution fails or if there are issues with the database connection.
         """
+        self.connection = get_db_connection()
         query = f"DELETE FROM {self.table} WHERE {pk} = {id_to_delete}"
         cursor = self.connection.cursor()
         cursor.execute(query)

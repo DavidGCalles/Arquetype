@@ -15,3 +15,7 @@ http://localhost:5000/swagger Para la documentación de swagger
 http://localhost:8080/ Para el front
 
 http://localhost:8000/ Para adminer y acceso a la base de datos de manera grafica.
+
+## Configuraciones necesarias
+    1. Proveer un archivo firebase.js correcto para la autenticación en front end
+    2. Configurar variables de entorno para GOOGLE_CLIENT_ID y GOOGLE_CLIENT_SECRET que serán utilizadas en la conexión con las apis en el flujo OAUTH

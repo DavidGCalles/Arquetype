@@ -299,6 +299,53 @@
             }
           }
         }
+      },
+      "/login": {
+      "get": {
+        "tags": ["auth"],
+        "summary": "Initiate OAuth2 login",
+        "description": "Redirects to Google's OAuth 2.0 server for user authentication and authorization.",
+        "produces": ["application/json"],
+        "responses": {
+          "302": {
+            "description": "Redirect to Google's authorization page"
+          }
+        }
+      }
+      },
+      "/login/google_callback": {
+        "get": {
+          "tags": ["auth"],
+          "summary": "Google OAuth2 callback endpoint",
+          "description": "Handles the response from Google after user authorization, exchanging the authorization code for an access token.",
+          "produces": ["application/json"],
+          "responses": {
+            "200": {
+              "description": "Authentication successful",
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "message": {
+                    "type": "string",
+                    "example": "Authentication completed successfully."
+                  }
+                }
+              }
+            },
+            "400": {
+              "description": "Bad request, failed to exchange token",
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "error": {
+                    "type": "string",
+                    "example": "Failed to retrieve access token"
+                  }
+                }
+              }
+            }
+          }
+        }
       }
     }
 }

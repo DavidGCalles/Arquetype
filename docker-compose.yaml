@@ -17,6 +17,8 @@ services:
     build: ./flask_blueprint
     ports:
       - "5000:5000"
+    env_file:
+      - .env
     depends_on:
       - db
     restart: unless-stopped
