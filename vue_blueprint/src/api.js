@@ -19,4 +19,19 @@ export const pingServer = async () => {
   }
 };
 
+// Function to initiate OAuth login flow
+export const initiateOAuthLogin = async () => {
+  try {
+    const response = await apiClient.get('/login');
+    if (response.data.url) {
+      window.location.href = response.data.url; // Redirect the user
+    }
+    return response.data;
+  } catch (error) {
+    console.error('Error in initiateOAuthLogin:', error);
+    throw error;
+  }
+};
+
+
 // You can add more API functions here as needed
