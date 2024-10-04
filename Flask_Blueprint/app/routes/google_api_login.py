@@ -22,12 +22,13 @@ def index():
     google = OAuth2Session(GOOGLE_CLIENT_ID, scope=SCOPE, redirect_uri=REDIRECT_URI)
     authorization_url, state = google.authorization_url(AUTH_URI, access_type="offline", prompt="select_account")
     session['oauth_state'] = state
-    return redirect(authorization_url)
+    #return redirect(authorization_url)
+    return jsonify({'url': authorization_url})
 
 @login_bp.route('/login/google_callback')
 def callback():
     print("Entrando en googleCallback")
-    google = OAuth2Session(GOOGLE_CLIENT_ID, state=session['oauth_state'], redirect_uri=REDIRECT_URI)
+    google = OAuth2Session(GOOGLE_CLIENT_ID, state=session.get('oauth_state', None), redirect_uri=REDIRECT_URI)
     token = google.fetch_token(TOKEN_URI, client_secret=GOOGLE_CLIENT_SECRET, authorization_response=request.url)
     session['oauth_token'] = token
     return jsonify({"message":'Autenticación completada.'})

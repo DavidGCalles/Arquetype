@@ -4,7 +4,7 @@ import { RouterLink, RouterView } from 'vue-router';
 import HelloWorld from './components/HelloWorld.vue';
 import { auth, googleProvider } from './firebase'; 
 import { signInWithPopup, signOut, onAuthStateChanged } from 'firebase/auth';
-import { pingServer } from './api'; // Import the pingServer function
+import { pingServer, initiateOAuthLogin } from './api'; // Import the pingServer function
 
 // State to keep track of the authenticated user
 const user = ref(null);
@@ -31,6 +31,15 @@ const logout = async () => {
     console.error('Error during logout:', error);
   }
 };
+
+const loginViaOAuth = async () => {
+  try {
+    await initiateOAuthLogin(); // This will handle the redirection
+  } catch (error) {
+    console.error('Error during OAuth login:', error);
+  }
+};
+
 
 // Function to ping the server and update the ping result state
 const handlePing = async () => {
@@ -74,6 +83,11 @@ onMounted(() => {
         <!-- Ping Server Button -->
         <button @click="handlePing">Ping Server</button>
         <p v-if="pingResult">{{ pingResult }}</p> <!-- Display the ping result -->
+
+        <div>
+          <button @click="loginViaOAuth">Login with Google (OAuth)</button>
+        </div>
+
       </div>
     </div>
   </header>
